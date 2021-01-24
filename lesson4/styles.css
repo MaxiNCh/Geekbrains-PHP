@@ -1,0 +1,67 @@
+body {
+	padding-left: 5vw;
+	padding-right: 5vw;
+	box-sizing: border-box;
+	background-color: #a3d4d9;
+}
+.heading {
+	text-align: center;
+}
+.images {
+	display: flex;
+	flex-wrap: wrap;
+}
+.image {
+	margin: 10px;
+	width: 150px;
+	display: block;
+}
+.image:hover {
+	cursor: pointer;
+}
+.open-btn:hover {
+	cursor: pointer;
+}
+
+.upload {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+
+.modal {
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	display: none;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+	padding: 20px;
+}
+.modal-content {
+	position: relative;
+	border: 2px solid #efefef;
+
+}
+.modal-image {
+	display: block;
+	max-width: 50vw;
+}
+.close-btn {
+	position: absolute;
+	right: -24px;
+	top: -32px;
+	color: #fefefe;
+	font-size: 32px;
+	font-weight: bold;
+}
+.close-btn:hover {
+	color: black;
+	cursor: pointer;
+}
