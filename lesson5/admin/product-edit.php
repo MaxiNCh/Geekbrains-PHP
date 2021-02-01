@@ -83,8 +83,8 @@ function renderImage($id, $dir)
 						<input value="Обновить" type="submit">
 					</form>
 				</div>
-				<div>
-					<a href="./delProduct.php?productId=$productId"><i class='fas fa-trash-alt catalog__del catalog__del-big'></i></a>
+				<div class="catalog__delete">
+					<a href="./delProduct.php?productId=<?= $productId ?>"><i class='fas fa-trash-alt catalog__del-big'></i></a>
 				</div>
 			</div>
 			<?php

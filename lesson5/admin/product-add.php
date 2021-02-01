@@ -38,7 +38,7 @@ require('admin-link.php');
 				<label for="title">Наименование</label>
 				<input type="text" id="title" name="title">
 				<br>
-				<label for="price">Price</label>
+				<label for="price">Цена</label>
 				<input type="text" id="price" name="price">
 				<br>
 				<input value="Добавить" type="submit">

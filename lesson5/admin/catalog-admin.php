@@ -37,8 +37,8 @@ function renderImages($dir)
 						<p class='catalog__price'>Price: $price &#8381;</p>
 					</a>
 					<div class='catalog__admin'>
-						<a href='./product-edit.php?productId=$productId'><i class='fas fa-edit catalog__edit'></i></a>
-						<a href='./delProduct.php?productId=$productId'><i class='fas fa-trash-alt catalog__del'></i></a>
+						<a class='catalog__edit' href='./product-edit.php?productId=$productId'><i class='fas fa-edit '></i></a>
+						<a class='catalog__del' href='./delProduct.php?productId=$productId'><i class='fas fa-trash-alt'></i></a>
 					</div>
 				</div>";
 		}

@@ -17,6 +17,7 @@ if (mysqli_query($link, $delete)) {
 	mysqli_close($link);
 	header("Location: catalog-admin.php");
 } else {
+	echo "$id";
 	echo 'Ошибка удаления';
 }
 
