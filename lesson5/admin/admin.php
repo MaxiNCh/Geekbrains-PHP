@@ -4,8 +4,8 @@
  * Страница каталога для админа.
  * 
  */
-require('admin-link.php');
-require('updateProduct.php');
+require('./link.php');
+require('functions.php');
 
 /**
  * Функция подключается к базе данных картинок, по этим данным возвращаем блок с кртинками.
@@ -29,7 +29,7 @@ function renderImages($dir)
 			$render .= 
 				"
 				<div class='catalog__product'>
-					<a class='catalog__link' href='./product-admin.php?productId=$productId' >
+					<a class='catalog__link' href='./product-edit.php?productId=$productId' >
 						<div class='catalog__wrapper'>
 							<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
 						</div>
@@ -38,7 +38,7 @@ function renderImages($dir)
 					</a>
 					<div class='catalog__admin'>
 						<a class='catalog__edit' href='./product-edit.php?productId=$productId'><i class='fas fa-edit '></i></a>
-						<a class='catalog__del' href='./delProduct.php?productId=$productId'><i class='fas fa-trash-alt'></i></a>
+						<a class='catalog__del' href='./delete.php?productId=$productId'><i class='fas fa-trash-alt'></i></a>
 					</div>
 				</div>";
 		}

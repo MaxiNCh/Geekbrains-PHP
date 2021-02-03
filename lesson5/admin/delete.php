@@ -4,18 +4,17 @@
  *	Файл содержит процедуру удаления продукта
  * 
  */
-require('admin-link.php');
-require('updateProduct.php');
+require('./link.php');
 
 global $link;
 
-$id = $_GET['productId'];
+$id = (int) (int) $_GET['productId'];
 
 $delete = "DELETE FROM products WHERE id = $id";
 
 if (mysqli_query($link, $delete)) {
 	mysqli_close($link);
-	header("Location: catalog-admin.php");
+	header("Location: admin.php");
 } else {
 	echo "$id";
 	echo 'Ошибка удаления';

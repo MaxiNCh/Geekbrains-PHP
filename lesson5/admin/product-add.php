@@ -5,8 +5,8 @@
  * Страница для добавления нового продукта
  * 
  */
-require('addProduct.php');
-require('admin-link.php');
+require('functions.php');
+require('./link.php');
 
 ?>
 
@@ -26,7 +26,7 @@ require('admin-link.php');
 	<header>
 		<h2 class="heading">Add new product</h2>	
 	</header>
-	<nav class="nav"><a class="nav-link" href="catalog-admin.php">Catalog</a></nav>
+	<nav class="nav"><a class="nav-link" href="admin.php">Catalog</a></nav>
 
 	<section class="product-add">
 		<div class="product-add__form">
