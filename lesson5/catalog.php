@@ -1,6 +1,6 @@
 <?php
 
-require('uploadImg.php');
+require('link.php');
 
 /**
  * Функция подключается к базе данных картинок, по этим данным возвращаем блок с кртинками.
@@ -13,19 +13,28 @@ function renderImages($dir)
 
 	$render = '';
 	
-	if ($result = mysqli_query($link, 'SELECT * FROM images ORDER BY counter_clicks DESC')) {
-		while ($image = mysqli_fetch_assoc($result)) {
-			$imageName = $image['name'];
-			$imageUrl = $dir . $imageName;
-			$imageId = $image['id'];
-			$imageCounter = $image['counter_clicks'];
+	if ($result = mysqli_query($link, 'SELECT * FROM products ORDER BY counter_clicks DESC')) {
+		while ($product = mysqli_fetch_assoc($result)) {
+			$productName = $product['name'];
+			$productUrl = $dir . $productName;
+			$productId = $product['id'];
+			$productCounter = $product['counter_clicks'];
+			$title = $product['title'];
+			$price = $product['price'];
 			$render .= 
-				"<a class='image-link' href='counter.php?imageId=$imageId' >
-					<img class='image' id='$imageId' src='$imageUrl' alt='image-$imageId'>
-				</a>";
+				"
+				<div class='catalog__product'>
+				<a class='catalog__link' href='counter.php?productId=$productId' >
+					<div class='catalog__wrapper'>
+						<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
+					</div>
+					<p class='catalog__title'><b>$title</b></p>
+					<p class='catalog__price'>Price: $price &#8381;</p>
+				</a>
+				</div>";
 		}
 	}
-
+	
 
 	mysqli_close($link);
 	return $render;
@@ -42,22 +51,10 @@ function renderImages($dir)
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<h2 class="heading">Gallery</h2>
+	<h2 class="heading">Catalog</h2>
 	<section class="section">
 		
-		<div class="upload">
-			<form enctype="multipart/form-data" method="post">
-				<!-- Ограничивает максимальный размер файл 1Мб -->
-				<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-				<input type="file" id="avatar" name="avatar" accept=".jpg,.png">
-				<input value="Загрузить" type="submit">
-			</form>
-			<?php
-				uploadImg($DIR);
-			?>
-		</div>
-
-		<div class="images">
+		<div class="products">
 			<?php
 				echo renderImages($DIR);
 			?>

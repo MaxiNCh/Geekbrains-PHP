@@ -8,11 +8,11 @@
 
 	require('uploadImg.php');
 
-	$imageId = $_GET['imageId'];
+	$productId = $_GET['productId'];
 
 	global $link;
 
-	$update = "UPDATE images SET counter_clicks = counter_clicks + 1 WHERE id = '$imageId'";
+	$update = "UPDATE products SET counter_clicks = counter_clicks + 1 WHERE id = '$productId'";
 
 	if (!($result = mysqli_query($link, $update))) {
 		echo 'UPDATE ERROR';
@@ -20,6 +20,6 @@
 
 	mysqli_close($link);
 
-	header("Location: image.php?imageId=$imageId");
+	header("Location: product.php?productId=$productId");
 
 ?>
