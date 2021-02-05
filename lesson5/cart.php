@@ -4,25 +4,36 @@ require('link.php');
 
 session_start();
 
+
 /**
  * Функция подключается к базе данных картинок, по этим данным возвращаем блок с кртинками.
  * @param  [string] $dir [адрес папки, где хранятся картинки]
  * @return [string]      [возращает HTML блок с картинками]
  */
-function renderImages($dir)
+function renderProduct($dir)
 {
 	global $link;
 
+	// Создаем строку $iDs, в которой содержатся id продуктов, которые содержатся в корзине.
+	foreach ($_SESSION['cart'] as $id => $qty) {
+		$array[] = $id;
+	}
+	$iDs = implode(', ', $array);
+
 	$render = '';
+	$total = 0;
 	
-	if ($result = mysqli_query($link, 'SELECT * FROM products ORDER BY counter_clicks DESC')) {
+	if ($result = mysqli_query($link, "SELECT * FROM products WHERE id IN ($iDs) ORDER BY counter_clicks DESC")) {
 		while ($product = mysqli_fetch_assoc($result)) {
 			$productName = $product['name'];
 			$productUrl = $dir . $productName;
 			$productId = $product['id'];
+			$qty = $_SESSION['cart'][$productId];
 			$productCounter = $product['counter_clicks'];
 			$title = $product['title'];
 			$price = $product['price'];
+			$subTotal = $price * $qty;
+			$total += $subTotal;
 			$render .= 
 				"
 				<div class='catalog__product'>
@@ -31,17 +42,20 @@ function renderImages($dir)
 						<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
 					</div>
 					<p class='catalog__title'><b>$title</b></p>
-					<p class='catalog__price'>Price: $price &#8381;</p>
-				</a>
-				<a class='add-to-cart-link' href='addToCart.php?productId=$productId'>
-					<i class='fas fa-cart-plus'></i> Add to cart
+					<p class='catalog__price'>Qyantity: $qty</p>
+					<p class='catalog__price'>Subtotal: $subTotal &#8381;</p>
+
 				</a>
 				</div>";
 		}
 	}
 	
 	mysqli_close($link);
-	return $render;
+
+	// Возвращаем массив, содержащий:
+	// [0] - HTML часть
+	// [1] - сумму всех товаров в корзине.
+	return [$render, $total];
 }
 
 ?>
@@ -49,7 +63,7 @@ function renderImages($dir)
 <!DOCTYPE html>
 <html>
 <head>
-	<title >Gallery</title>
+	<title >Cart</title>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
@@ -57,15 +71,26 @@ function renderImages($dir)
 
 </head>
 <body>
-	<h2 class="heading">Catalog</h2>
-	<a class="catalog__cart-link" href="cart.php"><h3 class="catalog__h3"></i> Cart</h3></a>
+	<h2 class="heading">Cart</h2>
+	<a class="catalog__cart-link" href="catalog.php"><h3 class="catalog__h3">Catalog</h3></a>
 	<section class="section">
 		
 		<div class="products">
 			<?php
-				echo renderImages($DIR);
+				$products = renderProduct($DIR);
+				echo $products[0];
 			?>
 		</div>
+
+		<?php 
+			
+			if ($products[1] != 0) {
+				echo "<h3 class='cart__total'>Total price: {$products[1]} </h3>";
+			} else {
+				echo "<h3 class='cart__total'>Cart is empty</h3>";
+			}
+
+		?>
 		
 	</section>
 
@@ -76,4 +101,3 @@ function renderImages($dir)
 	</script>
 </body>
 </html>
-

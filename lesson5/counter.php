@@ -8,7 +8,7 @@
 
 	require('uploadImg.php');
 
-	$productId = $_GET['productId'];
+	$productId = (int) $_GET['productId'];
 
 	global $link;
 

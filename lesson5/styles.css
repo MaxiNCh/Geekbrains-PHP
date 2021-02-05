@@ -1,21 +1,23 @@
 body {
-	padding: 3% 5%;
+	padding: 3% 7%;
 	box-sizing: border-box;
 	background-color: #a3d4d9;
 	font-family: 'Open Sans', sans-serif;
+	min-height: 90vh;
 }
 .heading {
 	text-align: center;
 }
 .products {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	flex-wrap: wrap;
 }
-.catalog__add-link {
+.catalog__add-link, .catalog__cart-link {
 	text-decoration: none;
+	color: blue;
 }
-.catalog__add-link:hover {
+.catalog__add-link:hover, .catalog__cart-link:hover {
 	color: yellow;
 }
 
@@ -47,9 +49,10 @@ body {
 	display: flex;
 	text-align: center;
 	flex-direction: column;
-	margin-bottom: 1rem;
+	/*margin-bottom: 1rem;*/
 	text-decoration: none;
 	min-height: 12rem;
+	color: blue;
 }
 
 .catalog__link:hover {
@@ -62,11 +65,49 @@ body {
 	margin-bottom: .5rem;
 }
 
+.cart__links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.add-to-cart-link {
+	margin-top: 0.5rem;
+	margin-bottom: .5rem;
+	color: darkgreen;
+	font-weight: bolder;
+	text-decoration: none;
+}
+
+.del-from-cart-link {
+	margin-top: 0.5rem;
+	margin-bottom: .5rem;
+	color: darkred;
+	font-weight: bolder;
+	text-decoration: none;
+}
+.del-from-cart-link:hover {
+	color: red;
+}
+
+.add-to-cart-link:hover {
+	color: green;
+}
+
+.cart__total {
+	font-size: 1.5em;
+	text-align: center;
+}
+
 .catalog__admin {
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 1rem;
+}
+
+.catalog__edit, .catalog__del {
+	color: blue;
 }
 
 .catalog__edit:hover {
@@ -98,17 +139,25 @@ body {
 
 .product {
 	margin-top: 3rem;
-	text-align: center;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.product > * {
+	flex-basis: 25%;
 }
 
 .product-body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 .product-img {
 	max-width: 15rem;
+	height: auto;
 }
 .product-counter {
 	font-size: 1.5rem;
@@ -145,11 +194,19 @@ body {
 .nav {
 	text-align: right;
 }
+.nav-center {
+	display: flex;
+	justify-content: space-around;
+}
 .nav-link {
 	text-decoration: none;
 	margin-right: 10rem;
 	color: blue;
 	font-size: 1.2em;
+}
+
+.m0 {
+	margin-right: 0;
 }
 
 .nav-link:hover {
