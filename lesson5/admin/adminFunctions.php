@@ -2,7 +2,6 @@
 
 require('./link.php');
 
-
 function addProduct($dir)
 {
 	global $link;

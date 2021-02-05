@@ -4,8 +4,16 @@
  * Страница каталога для админа.
  * 
  */
+session_start();
+// Проверка, есть ли у пользователя права администратора. Авторизация.
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+	echo "<a href='../catalog.php'>Return to catalog </a><br>";
+	exit("You don't have admin rights <br>");
+}
+
 require('./link.php');
-require('functions.php');
+require('adminFunctions.php');
+
 
 /**
  * Функция подключается к базе данных картинок, по этим данным возвращаем блок с кртинками.

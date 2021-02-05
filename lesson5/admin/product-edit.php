@@ -7,7 +7,14 @@
  */
 
 require('./link.php');
-require('functions.php');
+require('adminFunctions.php');
+
+session_start();
+// Проверка, есть ли у пользователя права администратора.
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+	echo "<a href='../catalog.php'>Return to catalog </a><br>";
+	exit("You don't have admin rights <br>");
+}
 
 $productId = (int) $_GET['productId'];
 

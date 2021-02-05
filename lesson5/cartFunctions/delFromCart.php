@@ -1,6 +1,6 @@
 <?php 
 
-require('link.php');
+require('../link.php');
 
 session_start();
 
@@ -10,6 +10,6 @@ if (isset($_SESSION['cart'][$productId])) {
 	unset($_SESSION['cart'][$productId]);
 }
 
-header("Location: product.php?productId=$productId");
+header("Location: ../product.php?productId=$productId");
 
 ?>

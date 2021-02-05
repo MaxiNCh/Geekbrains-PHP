@@ -5,6 +5,16 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	min-height: 90vh;
 }
+
+.greeting {
+	display: flex;
+	justify-content: space-around;
+}
+.greeting > h4 {
+	display: inline-block;
+	margin: 0;
+}
+
 .heading {
 	text-align: center;
 }
@@ -16,6 +26,10 @@ body {
 .catalog__add-link, .catalog__cart-link {
 	text-decoration: none;
 	color: blue;
+
+}
+.catalog__h3 {
+	display: inline-block;
 }
 .catalog__add-link:hover, .catalog__cart-link:hover {
 	color: yellow;
@@ -191,6 +205,22 @@ body {
 	margin: 0.5rem;
 }
 
+.sign-in__links {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.sign-in {
+	margin-left: 1em;
+	text-decoration: none;
+	color: blue;
+}
+
+.sign-in:hover {
+	color: darkorange;
+}
+
+
 .nav {
 	text-align: right;
 }
@@ -209,6 +239,32 @@ body {
 	margin-right: 0;
 }
 
+.submit-btn {
+	border: none;
+	background: none;
+	color: blue;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1rem;
+}
+.submit-btn:hover {
+	cursor: pointer;
+	color: darkorange;
+}
+.submit-border {
+	border: 1px solid blue;
+	border-radius: 5px;
+	margin-top: 1%;
+}
+.submit-border:hover {
+	border: 1px solid darkorange;
+
+}
+
 .nav-link:hover {
 	color: yellow;
+}
+
+.registration {
+	text-align: center;
+	margin: 3%;
 }

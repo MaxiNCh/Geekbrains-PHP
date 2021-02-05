@@ -1,6 +1,6 @@
 <?php 
 
-require('link.php');
+require('../link.php');
 
 session_start();
 
@@ -12,6 +12,6 @@ if (isset($_SESSION['cart'][$productId])) {
 	$_SESSION['cart'][$productId] = 1;
 }
 
-header("Location: product.php?productId=$productId");
+header("Location: ../product.php?productId=$productId");
 
 ?>

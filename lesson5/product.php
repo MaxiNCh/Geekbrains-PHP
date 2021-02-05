@@ -45,7 +45,7 @@ function renderImage($id, $dir)
 		$render .= "</div>";
 	}
 
-	
+
 
 	mysqli_close($link);
 
@@ -72,7 +72,7 @@ function renderImage($id, $dir)
 	</header>
 	<nav class="nav-center">
 		<a class="nav-link m0" href="cart.php">Cart</a>
-		<a class="nav-link m0" href="catalog.php">Gallery</a>
+		<a class="nav-link m0" href="catalog.php">Catalog</a>
 	</nav>
 
 	<section class="product">
@@ -80,10 +80,10 @@ function renderImage($id, $dir)
 				echo renderImage($productId, $DIR);
 			?>
 			<div class="cart__links">
-				<a class='add-to-cart-link' href="addToCart.php?productId=<?= $productId ?>">
+				<a class='add-to-cart-link' href="./cartFunctions/addToCart.php?productId=<?= $productId ?>">
 						<i class='fas fa-cart-plus'></i> Add to cart
 				</a>
-				<a class='del-from-cart-link' href="delFromCart.php?productId=<?= $productId ?>">
+				<a class='del-from-cart-link' href="./cartFunctions/delFromCart.php?productId=<?= $productId ?>">
 						<i class="fas fa-trash"></i> Delete from cart
 				</a>
 			</div>

@@ -14,6 +14,10 @@ function renderProduct($dir)
 {
 	global $link;
 
+	if (!isset($_SESSION['cart'])) {
+		return [null, 0];
+	}
+
 	// Создаем строку $iDs, в которой содержатся id продуктов, которые содержатся в корзине.
 	foreach ($_SESSION['cart'] as $id => $qty) {
 		$array[] = $id;

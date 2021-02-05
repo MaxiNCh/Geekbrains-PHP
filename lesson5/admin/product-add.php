@@ -5,8 +5,15 @@
  * Страница для добавления нового продукта
  * 
  */
-require('functions.php');
+require('adminFunctions.php');
 require('./link.php');
+session_start();
+
+// Проверка, есть ли у пользователя права администратора.
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+	echo "<a href='../catalog.php'>Return to catalog </a><br>";
+	exit("You don't have admin rights <br>");
+}
 
 ?>
 

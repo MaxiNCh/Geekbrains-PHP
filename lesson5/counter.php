@@ -6,7 +6,7 @@
 	 * с картинкой счетик автоматически не прибавлялся.
 	 */
 
-	require('uploadImg.php');
+	require('link.php');
 
 	$productId = (int) $_GET['productId'];
 
