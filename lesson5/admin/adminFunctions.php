@@ -1,13 +1,6 @@
 <?php 
 
-/**
- *
- *	Файл содержит функции добавления нового файл
- * 
- */
-
-require('admin-link.php');
-
+require('./link.php');
 
 function addProduct($dir)
 {
@@ -49,6 +42,48 @@ function addProduct($dir)
 	}
 	
 }
+
+/**
+ * Функция обновляет параметры продукат
+ * @param  [string] $id  ID-продукта
+ * @param  [string] $dir директория хранения картинки
+ * @return [void]      
+ */
+function updateProduct($id, $dir)
+{
+	global $link;
+
+	// Проверяем, передано ли что-то в посто.
+	if (!empty($_POST)) {
+
+		$imgName = uploadImg($dir);
+		$productTitle = mysqli_escape_string($link, htmlspecialchars(strip_tags($_POST['title'])));
+		$productPrice = (float) ($_POST['price']);
+
+
+		// Проверка, были ли введены данные в форму.
+		// 
+		if (!empty($imgName) && !empty($productTitle) && !empty($productPrice)) {
+			$update = "UPDATE products SET 
+				title = '$productTitle',
+				price = '$productPrice',
+				name = '$imgName'
+				WHERE id = '$id'";
+
+				echo "$update <br>$imgName $productTitle $productPrice id: $id";
+
+			if (mysqli_query($link, $update)) {
+				header("Location: product-edit.php?productId=$id");
+			} else {
+				echo 'Ошибка записи';
+			}
+
+		} else {
+			echo 'Ошибка данных';
+		}
+	}
+}
+
 /**
  * Функция копирует в папку новую картинку и добавляет информацию о ней в базу данных
  * @param  [string] $dir [адрес папки с картинками]
@@ -64,6 +99,7 @@ function uploadImg($dir)
 		{
 			$imgName = basename($newImg['name']);
 			if (file_exists("$dir/$imgName")) {
+				echo "<br> Файл уже существует <br>";
 				return $imgName;
 			} else {
 				move_uploaded_file($newImg['tmp_name'], "$dir/$imgName");
@@ -75,6 +111,8 @@ function uploadImg($dir)
 		}
 	}
 }
+
+
 
 
 ?>

@@ -6,10 +6,17 @@
  * 
  */
 
-require('admin-link.php');
-require('updateProduct.php');
+require('./link.php');
+require('adminFunctions.php');
 
-$productId = $_GET['productId'];
+session_start();
+// Проверка, есть ли у пользователя права администратора.
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+	echo "<a href='../catalog.php'>Return to catalog </a><br>";
+	exit("You don't have admin rights <br>");
+}
+
+$productId = (int) $_GET['productId'];
 
 /**
  * Функция подключается к базе данных, возвращает картинку, инкрементирует количество посещений
@@ -61,7 +68,7 @@ function renderImage($id, $dir)
 	<header>
 		<h2 class="heading">Product</h2>	
 	</header>
-	<nav class="nav"><a class="nav-link" href="catalog-admin.php">Gallery</a></nav>
+	<nav class="nav"><a class="nav-link" href="admin.php">Gallery</a></nav>
 
 	<section class="product-edit">
 			<?php 
@@ -84,7 +91,7 @@ function renderImage($id, $dir)
 					</form>
 				</div>
 				<div class="catalog__delete">
-					<a href="./delProduct.php?productId=<?= $productId ?>"><i class='fas fa-trash-alt catalog__del-big'></i></a>
+					<a href="./delete.php?productId=<?= $productId ?>"><i class='fas fa-trash-alt catalog__del-big'></i></a>
 				</div>
 			</div>
 			<?php
