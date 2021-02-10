@@ -6,6 +6,11 @@ body {
 	min-height: 90vh;
 }
 
+button {
+	font-family: 'Open Sans', sans-serif;
+	padding: 0;
+}
+
 .greeting {
 	display: flex;
 	justify-content: space-around;
@@ -36,7 +41,7 @@ body {
 }
 
 .catalog__product {
-	border: 1px solid #efefef;
+	border: 1px solid ivory;
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
@@ -71,7 +76,7 @@ body {
 
 .catalog__link:hover {
 	cursor: pointer;
-	background: #efefef;
+	background: ivory;
 }
 
 .catalog__price, .catalog__title {
@@ -113,6 +118,26 @@ body {
 	text-align: center;
 }
 
+.buy-btn {
+	display: inline-block;
+	background-color: unset;
+	border: none;
+	font-size: 1.15em;
+	color: blue;
+	padding: 2px 5px;
+	text-decoration: none;
+}
+
+.buy-btn:focus {
+	outline: none;
+}
+.buy-btn:hover {
+	cursor: pointer;
+	border: 1px solid blue;
+	background-color: ivory;
+	border-radius: 5px;
+
+}
 .catalog__admin {
 	width: 100%;
 	display: flex;
@@ -261,10 +286,35 @@ body {
 }
 
 .nav-link:hover {
-	color: yellow;
+	color: peru;
 }
 
 .registration {
 	text-align: center;
 	margin: 3%;
+}
+.checkout {
+	margin-top: 2em;
+}
+.checkout-section {
+	display: flex;
+	justify-content: center;
+	margin-top: 5em;
+}
+.checkout-items {
+	margin-right: 20%;
+}
+.order {
+	display: grid;
+	grid-template-columns: 8em 12em 6em;
+}
+.order label {
+	grid-column-start: 1;
+}
+.order input {
+	grid-column-start: 2;
+}
+.order .buy-btn {
+	grid-column-start: 3;
+	grid-row: 1 / span 3;
 }

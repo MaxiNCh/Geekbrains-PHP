@@ -80,11 +80,12 @@ function renderImage($id, $dir)
 				echo renderImage($productId, $DIR);
 			?>
 			<div class="cart__links">
-				<a class='add-to-cart-link' href="./cartFunctions/addToCart.php?productId=<?= $productId ?>">
-						<i class='fas fa-cart-plus'></i> Add to cart
+				<a class='add-to-cart-link' href="./Functions/addToCart.php?productId=<?= $productId ?>">
+					<i class='fas fa-cart-plus'></i> Add to cart
 				</a>
-				<a class='del-from-cart-link' href="./cartFunctions/delFromCart.php?productId=<?= $productId ?>">
-						<i class="fas fa-trash"></i> Delete from cart
+				<a class='del-from-cart-link' 
+					href="./Functions/delFromCart.php?productId=<?= $productId ?>">
+					<i class="fas fa-trash"></i> Delete from cart
 				</a>
 			</div>
 		

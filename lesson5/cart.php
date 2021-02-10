@@ -19,10 +19,7 @@ function renderProduct($dir)
 	}
 
 	// Создаем строку $iDs, в которой содержатся id продуктов, которые содержатся в корзине.
-	foreach ($_SESSION['cart'] as $id => $qty) {
-		$array[] = $id;
-	}
-	$iDs = implode(', ', $array);
+	$iDs = implode(', ', array_keys($_SESSION['cart']));
 
 	$render = '';
 	$total = 0;
@@ -33,35 +30,30 @@ function renderProduct($dir)
 			$productUrl = $dir . $productName;
 			$productId = $product['id'];
 			$qty = $_SESSION['cart'][$productId];
-			$productCounter = $product['counter_clicks'];
 			$title = $product['title'];
 			$price = $product['price'];
 			$subTotal = $price * $qty;
 			$total += $subTotal;
 			$render .= 
-				"
-				<div class='catalog__product'>
-				<a class='catalog__link' href='counter.php?productId=$productId' >
-					<div class='catalog__wrapper'>
-						<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
-					</div>
-					<p class='catalog__title'><b>$title</b></p>
-					<p class='catalog__price'>Qyantity: $qty</p>
-					<p class='catalog__price'>Subtotal: $subTotal &#8381;</p>
-
-				</a>
+				"<div class='catalog__product'>
+					<a class='catalog__link' href='counter.php?productId=$productId' >
+						<div class='catalog__wrapper'>
+							<img class='catalog__image' id='$productId' src='$productUrl'
+							alt='product-$productId'>
+						</div>
+						<p class='catalog__title'><b>$title</b></p>
+						<p class='catalog__price'>Quantity: $qty</p>
+						<p class='catalog__price'>Subtotal: $subTotal &#8381;</p>
+					</a>
 				</div>";
 		}
 	}
-	
 	mysqli_close($link);
-
 	// Возвращаем массив, содержащий:
 	// [0] - HTML часть
 	// [1] - сумму всех товаров в корзине.
 	return [$render, $total];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -72,36 +64,27 @@ function renderProduct($dir)
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 	<script src="https://kit.fontawesome.com/a03bfa2223.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 	<h2 class="heading">Cart</h2>
 	<a class="catalog__cart-link" href="catalog.php"><h3 class="catalog__h3">Catalog</h3></a>
 	<section class="section">
-		
 		<div class="products">
 			<?php
 				$products = renderProduct($DIR);
 				echo $products[0];
 			?>
 		</div>
-
-		<?php 
-			
-			if ($products[1] != 0) {
-				echo "<h3 class='cart__total'>Total price: {$products[1]} </h3>";
-			} else {
-				echo "<h3 class='cart__total'>Cart is empty</h3>";
-			}
-
-		?>
-		
+		<?php if ($products[1] != 0) { ?>
+			<h3 class='cart__total'>Total price: <?= $products[1] ?></h3>
+			<a href="checkout.php" class="btn buy-btn">
+				<i class="fas fa-money-check-alt"></i><span> Купить</span>
+			</a>
+		<?php } else { ?>
+			<h3 class='cart__total'>Cart is empty</h3>
+		<?php }	?>
 	</section>
-
-
-
-	<script>
-		
-	</script>
+<script>
+</script>
 </body>
 </html>

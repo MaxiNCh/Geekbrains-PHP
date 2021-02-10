@@ -12,7 +12,7 @@ if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
 }
 
 require('./link.php');
-require('adminFunctions.php');
+require('../Functions/adminFunctions.php');
 
 
 /**

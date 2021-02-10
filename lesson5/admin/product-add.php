@@ -5,7 +5,7 @@
  * Страница для добавления нового продукта
  * 
  */
-require('adminFunctions.php');
+require('../Functions/adminFunctions.php');
 require('./link.php');
 session_start();
 
