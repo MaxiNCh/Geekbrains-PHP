@@ -15,7 +15,7 @@ button {
 	display: flex;
 	justify-content: space-around;
 }
-.greeting > h4 {
+.greeting>h4 {
 	display: inline-block;
 	margin: 0;
 }
@@ -52,7 +52,7 @@ button {
 .catalog__wrapper {
 	min-height: 12rem;
 	display: flex;
-	align-items: center;	
+	align-items: center;
 }
 
 .catalog__image {
@@ -127,7 +127,6 @@ button {
 	padding: 2px 5px;
 	text-decoration: none;
 }
-
 .buy-btn:focus {
 	outline: none;
 }
@@ -136,7 +135,6 @@ button {
 	border: 1px solid blue;
 	background-color: ivory;
 	border-radius: 5px;
-
 }
 .catalog__admin {
 	width: 100%;
@@ -144,7 +142,6 @@ button {
 	justify-content: space-around;
 	margin-bottom: 1rem;
 }
-
 .catalog__edit, .catalog__del {
 	color: blue;
 }
@@ -152,41 +149,33 @@ button {
 .catalog__edit:hover {
 	color: violet;
 }
-
 .catalog__del:hover {
 	color: red;
 }
-
 .catalog__del-big {
 	font-size: 1.5em;
 	color: orange;
 }
-
 .catalog__del-big:hover {
 	transition: all .8s;
 	color: red;
 }
-
 .catalog__delete {
 	text-align: center;
 	margin-top: 2rem;
 }
-
 .upload {
 	text-align: left;
 }
-
 .product {
 	margin-top: 3rem;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 }
-
-.product > * {
+.product>* {
 	flex-basis: 25%;
 }
-
 .product-body {
 	display: flex;
 	justify-content: center;
@@ -206,7 +195,7 @@ button {
 	text-align: center;
 }
 
-.product-add input, .product-add label{
+.product-add input, .product-add label {
 	margin: 0.5rem;
 	font-size: 1.1em;
 	color: green;
@@ -252,6 +241,7 @@ button {
 .nav-center {
 	display: flex;
 	justify-content: space-around;
+	margin-bottom: 2em;
 }
 .nav-link {
 	text-decoration: none;
@@ -317,4 +307,33 @@ button {
 .order .buy-btn {
 	grid-column-start: 3;
 	grid-row: 1 / span 3;
+}
+.orders {
+	/*text-align: center;*/
+}
+.orders__table td {
+	text-align: center;
+}
+.orders__btn {
+	text-align: right;
+	margin-right: 10em;
+}
+
+.update-btn {
+	display: inline-block;
+	background-color: unset;
+	border: none;
+	font-size: 1em;
+	color: blue;
+	padding: 2px 5px;
+	text-decoration: none;
+	box-sizing: content-box;
+}
+.update-btn:focus {
+	outline: none;
+}
+.update-btn:hover {
+	cursor: pointer;
+	outline: 1px solid blue;
+	background-color: ivory;
 }

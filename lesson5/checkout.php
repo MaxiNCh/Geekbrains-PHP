@@ -27,8 +27,8 @@
       $userId = $_SESSION['userId'];
       $date = date("Y-m-d H:i:s");
       // Создаем новый заказ в БД.
-      $insertOrder = "INSERT INTO orders (user_id, address, phone, date)
-        VALUES ('$userId', '$address', '$phone', '$date')";
+      $insertOrder = "INSERT INTO orders (user_id, address, phone, date, status)
+        VALUES ('$userId', '$address', '$phone', '$date', 'new')";
       if (!mysqli_query($link, $insertOrder)) {
         echo 'Не удалось создать новый заказ в БД';
       }
