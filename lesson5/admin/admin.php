@@ -10,11 +10,8 @@ if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
 	echo "<a href='../catalog.php'>Return to catalog </a><br>";
 	exit("You don't have admin rights <br>");
 }
-
 require('./link.php');
-require('adminFunctions.php');
-
-
+require('../Functions/adminFunctions.php');
 /**
  * Функция подключается к базе данных картинок, по этим данным возвращаем блок с кртинками.
  * @param  [string] $dir [адрес папки, где хранятся картинки]
@@ -23,9 +20,7 @@ require('adminFunctions.php');
 function renderImages($dir)
 {
 	global $link;
-
 	$render = '';
-	
 	if ($result = mysqli_query($link, 'SELECT * FROM products ORDER BY counter_clicks DESC')) {
 		while ($product = mysqli_fetch_assoc($result)) {
 			$productName = $product['name'];
@@ -35,8 +30,7 @@ function renderImages($dir)
 			$title = $product['title'];
 			$price = $product['price'];
 			$render .= 
-				"
-				<div class='catalog__product'>
+				"<div class='catalog__product'>
 					<a class='catalog__link' href='./product-edit.php?productId=$productId' >
 						<div class='catalog__wrapper'>
 							<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
@@ -51,12 +45,9 @@ function renderImages($dir)
 				</div>";
 		}
 	}
-	
-
 	mysqli_close($link);
 	return $render;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -70,23 +61,18 @@ function renderImages($dir)
 </head>
 <body>
 	<h2 class="heading">Catalog</h2>
-	<a class="catalog__add-link" href="product-add.php"><h3 class="catalog__h3"><i class="fas fa-plus"></i> Add new product</h3></a>
+	<nav class="nav-center">
+		<a class="nav-link m0" href="product-add.php"><i class="fas fa-plus"></i> Add new product</a>
+		<a class="nav-link m0" href="orders.php">Orders</a>
+	</nav>
 	<section class="section">
-		
-		
-
 		<div class="products">
 			<?php
 				echo renderImages($DIR);
 			?>
 		</div>
-		
 	</section>
-
-
-
 	<script>
-		
 	</script>
 </body>
 </html>

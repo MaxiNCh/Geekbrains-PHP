@@ -7,7 +7,7 @@
  */
 
 require('./link.php');
-require('adminFunctions.php');
+require('../Functions/adminFunctions.php');
 
 session_start();
 // Проверка, есть ли у пользователя права администратора.

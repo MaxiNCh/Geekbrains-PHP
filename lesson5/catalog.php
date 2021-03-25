@@ -1,6 +1,7 @@
 <?php
 
 require('link.php');
+require('./Functions/SignIn.php');
 
 session_start();
 
@@ -12,9 +13,7 @@ session_start();
 function renderImages($dir)
 {
 	global $link;
-
 	$render = '';
-	
 	if ($result = mysqli_query($link, 'SELECT * FROM products ORDER BY counter_clicks DESC')) {
 		while ($product = mysqli_fetch_assoc($result)) {
 			$productName = $product['name'];
@@ -24,60 +23,24 @@ function renderImages($dir)
 			$title = $product['title'];
 			$price = $product['price'];
 			$render .= 
-				"
-				<div class='catalog__product'>
-				<a class='catalog__link' href='counter.php?productId=$productId' >
-					<div class='catalog__wrapper'>
-						<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
-					</div>
-					<p class='catalog__title'><b>$title</b></p>
-					<p class='catalog__price'>Price: $price &#8381;</p>
-				</a>
-				<a class='add-to-cart-link' href='cartFunctions/addToCart.php?productId=$productId'>
-					<i class='fas fa-cart-plus'></i> Add to cart
-				</a>
+				"<div class='catalog__product'>
+					<a class='catalog__link' href='counter.php?productId=$productId' >
+						<div class='catalog__wrapper'>
+							<img class='catalog__image' id='$productId' src='$productUrl' alt='product-$productId'>
+						</div>
+						<p class='catalog__title'><b>$title</b></p>
+						<p class='catalog__price'>Price: $price &#8381;</p>
+					</a>
+					<a class='add-to-cart-link' href='Functions/addToCart.php?productId=$productId'>
+						<i class='fas fa-cart-plus'></i> Add to cart
+					</a>
 				</div>";
 		}
 	}
-
 	mysqli_close($link);
 	return $render;
 }
-
-/**
- * Функция осуществляет аутентификацию пользователя. Проверяет наличие такого логина в БД.
- * Есть такой пользователь есть, то проверяется пароль.
- * @return [type] [description]
- */
-function signIn()
-	{	
-		echo "<br>";
-		if (isset($_POST['userLogin'])) {
-			global $link;
-
-			$userLogin = mysqli_escape_string($link, (string) htmlspecialchars(strip_tags($_POST['userLogin'])));
-			$password = mysqli_escape_string($link, (string) htmlspecialchars(strip_tags($_POST['password'])));
-
-
-			$select = "SELECT * FROM users WHERE login = '$userLogin'";
-			$result = mysqli_query($link, $select);
-			$user = mysqli_fetch_assoc($result);
-			if (!$user) {
-				echo "<h5 style='color: red'>Login or password incorrect</h5>";
-			} else {
-				if (password_verify($password, $user['password'])) {
-					$_SESSION['name'] = $user['name'];
-					$_SESSION['login'] = $user['login'];
-					$_SESSION['admin'] = ($user['admin'] == 1) ? true : false ;
-					echo "<h5>Signed in successfully </h5>";
-				} else {
-					echo "<h5 style='color: red'>Login or password incorrect</h5>";
-				}
-			}
-
-		} 
-	}
-
+signIn();
 ?>
 
 <!DOCTYPE html>
@@ -95,13 +58,10 @@ function signIn()
 		<?php 
 			if (isset($_SESSION['login'])) {
 				echo "<div class='greeting'>";
-
-
 				// Если у пользователя есть права администратора, то добавляется ссылка на страницу редактирования.
 				if ($_SESSION['admin']) {
 					echo "<a class='sign-in' href='admin/admin.php'> Admin </a>";
 				}
-
 				echo "<h4 > Hello {$_SESSION['name']}! </h4>
 						<a class='sign-in' href='signOut.php'>Sign Out</a>
 					</div>
@@ -115,9 +75,6 @@ function signIn()
 						<label for='password'>Password: </label>
 						<input type='password' id='password' name='password' required>
 						<input class='submit-btn' type='submit' value='Sign in'>";
-						
-				signIn();
-
 				echo "</form>
 					<a class='sign-in' href='registration.php'>Registration</a>
 				</div>
@@ -129,13 +86,11 @@ function signIn()
 	<h2 class="heading">Catalog</h2>
 	<a class="catalog__cart-link" href="cart.php"><h3 class="catalog__h3"> Cart</h3></a>
 	<section class="section">
-		
 		<div class="products">
 			<?php
 				echo renderImages($DIR);
 			?>
 		</div>
-		
 	</section>
 	<script>
 	</script>
